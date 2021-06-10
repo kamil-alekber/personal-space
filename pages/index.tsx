@@ -1,18 +1,13 @@
-import Head from "next/head";
-import styles from "../styles/Home.module.css";
+import Head from 'next/head'
+import styles from '../styles/Home.module.css'
 
-export default function Home() {
+export default function StartPage() {
   return (
     <div className={styles.container}>
       <Head>
         <title>Start Page</title>
-        <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <header>
-        <h2>Personal Space</h2>
-      </header>
-
+      <h2>Start Page</h2>
       <section>
         <h3>Current agenda:</h3>
         <ul>
@@ -46,9 +41,8 @@ export default function Home() {
       </section>
       <hr />
       <footer>
-        E-mail: {' '}
-        <a href="mailto:kamil.alekber@gmail.com">Kamil Alekber</a>
+        E-mail: <a href="mailto:kamil.alekber@gmail.com">Kamil Alekber</a>
       </footer>
     </div>
-  );
+  )
 }
