@@ -1,48 +1,49 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
+import Link from 'next/link'
 
 export default function StartPage() {
+  const catalog = []
+
+  for (let i = 0; i < 15; i++) {
+    catalog.push({
+      type: 'Микрокомпьютер',
+      name: 'Raspberry Pi 4 Model B (4GB)',
+      slug: 'raspberry-pi-4-model-b-4gb',
+      price: 10000,
+      imgUrl: 'raspberry.jpg',
+    })
+  }
+
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <title>Start Page</title>
       </Head>
-      <h2>Start Page</h2>
       <section>
-        <h3>Current agenda:</h3>
-        <ul>
-          <li>Looking for a job opening</li>
-          <li>Building a strong body</li>
-        </ul>
-      </section>
+        <h3>Микро-компьютеры</h3>
+        <ul className={styles.catalog}>
+          {catalog.map((item) => {
+            return (
+              <li className={styles.catalog_item}>
+                <img src={item.imgUrl} alt="" />
+                <div className={styles.catalog_item_description}>
+                  <small className="type">{item.type}</small>
+                  <span className="name">{item.name}</span>
+                  <span className="price">{item.price}</span>
 
-      <section>
-        <h3>Things I want to study:</h3>
-        <ul>
-          <li>
-            <img src="" alt="" />
-            With the high demand on digital currency I intend on studying this
-            new fascinating technology with all of its main derivatives:
-            blockchain, smart contract and dapp
-          </li>
-          <li>
-            <img src="" alt="" />
-            Rust: a new language for the future with IoT
-          </li>
+                  <div className="actions">
+                    <Link href={`/product/${item.slug}`}>
+                      <a>Подробней </a>
+                    </Link>
+                    <a> В корзину</a>
+                  </div>
+                </div>
+              </li>
+            )
+          })}
         </ul>
       </section>
-
-      <section>
-        <h3>Unfulfilled possibilities</h3>
-        <ul>
-          <li>Piano (need self-discipline)</li>
-          <li>Drawing anime-characters</li>
-        </ul>
-      </section>
-      <hr />
-      <footer>
-        E-mail: <a href="mailto:kamil.alekber@gmail.com">Kamil Alekber</a>
-      </footer>
     </div>
   )
 }

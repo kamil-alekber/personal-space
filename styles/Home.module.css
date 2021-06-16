@@ -1,8 +1,3 @@
-.container {
-  min-height: 100vh;
-  padding: 0 0.5rem;
-}
-
 .main {
   padding: 5rem 0;
   flex: 1;
@@ -115,4 +110,31 @@
     width: 100%;
     flex-direction: column;
   }
+}
+
+.catalog {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.catalog_item {
+  border: 1px solid salmon;
+  margin: 0.5rem;
+  padding: 1rem;
+}
+
+.catalog_item img {
+  width: 250px;
+}
+
+.catalog_item_description {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
