@@ -23,19 +23,35 @@ const BasketContext = React.createContext<{
 })
 
 export const BasketProvider: FC = function ({ children }) {
-  const [items, setItems] = useState<Item[]>([])
-  const [totalPrice, setTotalPrice] = useState(0)
+  const [items, setItems] = useState<Item[]>(() => {
+    let items = []
+
+    if (typeof localStorage !== 'undefined') {
+      const cartItems = localStorage?.getItem('cart')
+      if (cartItems) items = JSON.parse(cartItems)
+    }
+
+    return items
+  })
+  const [totalPrice, setTotalPrice] = useState(
+    items.reduce((total, item) => {
+      return total + item.price
+    }, 0)
+  )
 
   function addItem(item: Item) {
     const _items = [...items, item]
     setTotalPrice(totalPrice + item.price)
     setItems(_items)
+    localStorage.setItem('cart', JSON.stringify(_items))
   }
 
-  function removeItem(item: Item) {
-    const _items = items.filter((item) => item.name !== item.name)
-    setTotalPrice(totalPrice - item.price)
+  function removeItem(_item: Item) {
+    const _items = items.filter((item) => item.name !== _item.name)
+
+    setTotalPrice(totalPrice - _item.price)
     setItems(_items)
+    localStorage.setItem('cart', JSON.stringify(_items))
   }
 
   return (

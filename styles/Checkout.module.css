@@ -1,0 +1,16 @@
+.checkout_form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  text-align: left;
+}
+
+.checkout_form_input_group {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.checkout_order {
+  display: block;
+}

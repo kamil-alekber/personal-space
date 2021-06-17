@@ -7,8 +7,15 @@ body {
 }
 
 a {
-  color: inherit;
+  /* color: inherit; */
   text-decoration: none;
+  color: #0070f3;
+}
+
+a:hover,
+a:focus,
+a:active {
+  text-decoration: underline;
 }
 
 * {
@@ -16,7 +23,9 @@ a {
 }
 
 .container {
+  max-width: 1140px;
   min-height: 100vh;
   padding: 0 0.5rem;
+  margin: 0 auto;
   text-align: center;
 }
