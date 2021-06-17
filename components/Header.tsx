@@ -1,7 +1,11 @@
 import Link from 'next/link'
+import React from 'react'
+import { useBasket } from '../hooks/useBasket'
 import styles from '../styles/Header.module.css'
 
 export function Header() {
+  const basket = useBasket()
+
   return (
     <header className={styles.header}>
       <h2>Я могу</h2>
@@ -27,7 +31,9 @@ export function Header() {
           </Link>
         </li>
       </ul>
-      <div className={styles.header_basket}>5000тг 1 товар</div>
+      <div className={styles.header_basket}>
+        {basket.totalPrice}тг {basket.items.length} товар
+      </div>
     </header>
   )
 }
