@@ -1,8 +1,25 @@
 import { useBasket } from '../hooks/useBasket'
 import styles from '../styles/Checkout.module.css'
+import IndeterminateCheckBoxIcon from '@material-ui/icons/IndeterminateCheckBox'
 
 export default function Checkout() {
   const basket = useBasket()
+  const countedBasket: { [name: string]: { count: number; total: number } } = {}
+
+  for (let i = 0; i < basket.items.length; i++) {
+    const item = basket.items[i]
+
+    if (!countedBasket[item.name]) {
+      countedBasket[item.name] = { count: 0, total: 0 }
+    }
+
+    countedBasket[item.name] = {
+      count: countedBasket[item.name].count + 1,
+      total: countedBasket[item.name].total + item.price,
+    }
+  }
+  console.log(countedBasket)
+
   return (
     <div>
       <h3>Оформление заказа</h3>
@@ -78,20 +95,24 @@ export default function Checkout() {
             </tr>
           </thead>
           <tbody>
-            {basket.items.map((item) => {
+            {Object.keys(countedBasket).map((product, i) => {
               return (
-                <tr className="item" key={item.id}>
-                  <td className="item_name">
-                    {item.name}
+                <tr className="item" key={i}>
+                  <td
+                    className="item_name"
+                    style={{ display: 'flex', alignItems: 'center' }}
+                  >
+                    [x{countedBasket[product].count}] {product}
                     <a
+                      style={{ cursor: 'pointer' }}
                       onClick={() => {
-                        basket.removeItem(item)
+                        basket.removeItem(product)
                       }}
                     >
-                      x
+                      <IndeterminateCheckBoxIcon />
                     </a>
                   </td>
-                  <td className="item_total">{item.price}</td>
+                  <td className="item_total">{countedBasket[product].total}</td>
                 </tr>
               )
             })}

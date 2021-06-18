@@ -4,8 +4,6 @@ import { getProduct, getProductIds } from '../../utils/content'
 import styles from '../../styles/Product.module.css'
 
 export default function Product(props: { product?: Item }) {
-  console.log(props)
-
   return (
     <div>
       <div className={styles.main_info}>

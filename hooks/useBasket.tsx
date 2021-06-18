@@ -15,7 +15,7 @@ const BasketContext = React.createContext<{
   items: Item[]
   totalPrice: number
   addItem: (item: Item) => void
-  removeItem: (item: Item) => void
+  removeItem: (name: string) => void
 }>({
   items: [],
   totalPrice: 0,
@@ -47,10 +47,13 @@ export const BasketProvider: FC = function ({ children }) {
     localStorage.setItem('cart', JSON.stringify(_items))
   }
 
-  function removeItem(_item: Item) {
-    const _items = items.filter((item) => item.id !== _item.id)
+  function removeItem(_name: string) {
+    const idx = items.findIndex((item) => item.name === _name)
+    if (idx < 0) return
+    const _items = [...items]
+    const deletedItem = _items.splice(idx, 1)
 
-    setTotalPrice(totalPrice - _item.price)
+    setTotalPrice(totalPrice - deletedItem[0].price)
     setItems(_items)
     localStorage.setItem('cart', JSON.stringify(_items))
   }
