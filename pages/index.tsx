@@ -11,24 +11,24 @@ export default function StartPage() {
 
   for (let i = 0; i < 15; i++) {
     catalog.push({
+      id: Math.random() + '',
       type: 'microcomputer',
       userType: 'Микро-компьютер',
       name: 'Raspberry Pi 4 Model B (4GB)',
       slug: 'raspberry-pi-4-model-b-4gb',
       price: 10000,
-      userPrice: '10,000 тг.',
       imgUrl: 'raspberry.jpg',
     })
   }
 
   for (let i = 0; i < 15; i++) {
     catalog.push({
+      id: Math.random() + '',
       type: 'accessories',
       userType: 'Комплектующие',
       name: 'Raspberry Pi 3 case',
       slug: 'raspberry-pi-3-case',
       price: 2500,
-      userPrice: '2,500 тг.',
       imgUrl: 'raspberry_case.jpeg',
     })
   }
@@ -68,12 +68,12 @@ export default function StartPage() {
             )
             .map((item) => {
               return (
-                <li className={styles.catalog_item}>
+                <li className={styles.catalog_item} key={item.id}>
                   <img src={item.imgUrl} alt="" />
                   <div className={styles.catalog_item_description}>
                     <small className="type">{item.userType}</small>
                     <span className="name">{item.name}</span>
-                    <span className="price">{item.userPrice}</span>
+                    <span className="price">{item.price}</span>
 
                     <div className={styles.catalog_item_description_actions}>
                       <Link href={`/product/${item.slug}`}>

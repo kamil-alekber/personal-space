@@ -1,13 +1,13 @@
 import React, { FC, useContext, useState } from 'react'
 
 export interface Item {
+  id: string
   type: string
-  userType: string
   name: string
   slug: string
   price: number
-  userPrice: string
   imgUrl: string
+  userType: string
 }
 
 const BasketContext = React.createContext<{
@@ -47,7 +47,7 @@ export const BasketProvider: FC = function ({ children }) {
   }
 
   function removeItem(_item: Item) {
-    const _items = items.filter((item) => item.name !== _item.name)
+    const _items = items.filter((item) => item.id !== _item.id)
 
     setTotalPrice(totalPrice - _item.price)
     setItems(_items)

@@ -6,7 +6,32 @@ export default function Checkout() {
   return (
     <div>
       <h3>Оформление заказа</h3>
-      <form method="post" className={styles.checkout_form}>
+      <form
+        method="post"
+        onSubmit={(e) => {
+          e.preventDefault()
+          const inputFields = [
+            'name',
+            'familyName',
+            'country',
+            'address',
+            'city',
+            'region',
+            'postcode',
+            'phone',
+            'email',
+            'details',
+            'delivery_type',
+          ]
+          const inputFieldValues = {}
+
+          for (let i = 0; i < inputFields.length; i++) {
+            inputFieldValues[inputFields[i]] = e.target[inputFields[i]].value
+          }
+          console.log(inputFieldValues)
+        }}
+        className={styles.checkout_form}
+      >
         <div className={styles.checkout_form_input_group}>
           <h3>Форма заказа</h3>
           <label htmlFor="name">Имя </label>
@@ -66,7 +91,7 @@ export default function Checkout() {
                       x
                     </a>
                   </td>
-                  <td className="item_total">{item.userPrice}</td>
+                  <td className="item_total">{item.price}</td>
                 </tr>
               )
             })}
