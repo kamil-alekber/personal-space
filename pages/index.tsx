@@ -3,35 +3,13 @@ import styles from '../styles/Home.module.css'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Item, useBasket } from '../hooks/useBasket'
+import fs from 'fs'
+import path from 'path'
+import matter from 'gray-matter'
 
-export default function StartPage() {
+export default function StartPage({ catalog }: { catalog: Item[] }) {
   const router = useRouter()
   const basket = useBasket()
-  const catalog: Item[] = []
-
-  for (let i = 0; i < 15; i++) {
-    catalog.push({
-      id: Math.random() + '',
-      type: 'microcomputer',
-      userType: 'Микро-компьютер',
-      name: 'Raspberry Pi 4 Model B (4GB)',
-      slug: 'raspberry-pi-4-model-b-4gb',
-      price: 10000,
-      imgUrl: 'raspberry.jpg',
-    })
-  }
-
-  for (let i = 0; i < 15; i++) {
-    catalog.push({
-      id: Math.random() + '',
-      type: 'accessories',
-      userType: 'Комплектующие',
-      name: 'Raspberry Pi 3 case',
-      slug: 'raspberry-pi-3-case',
-      price: 2500,
-      imgUrl: 'raspberry_case.jpeg',
-    })
-  }
 
   return (
     <div>
@@ -96,4 +74,28 @@ export default function StartPage() {
       </section>
     </div>
   )
+}
+
+function getContent() {
+  const contentDir = path.join(process.cwd(), 'content')
+  const fileNames = fs.readdirSync(contentDir)
+  const data = fileNames.map((name) => {
+    const id = name.replace(/\.md$/, '')
+    const fullPath = path.join(contentDir, name)
+    const fileContents = fs.readFileSync(fullPath, 'utf8')
+
+    const matterResult = matter(fileContents)
+    return {
+      id,
+      ...matterResult.data,
+    }
+  })
+  return data
+}
+
+export async function getStaticProps() {
+  const catalog = getContent()
+  return {
+    props: { catalog },
+  }
 }

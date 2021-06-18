@@ -32,11 +32,15 @@ export function Header() {
         </li>
       </ul>
       <div className={styles.header_basket}>
-        <Link href="/checkout">
-          <a>
-            {basket.totalPrice}тг {basket.items.length} товар
-          </a>
-        </Link>
+        {basket.items.length ? (
+          <Link href="/checkout">
+            <a>
+              {basket.totalPrice}тг {basket.items.length} товар
+            </a>
+          </Link>
+        ) : (
+          'Пустая корзина'
+        )}
       </div>
     </header>
   )

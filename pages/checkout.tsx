@@ -80,7 +80,7 @@ export default function Checkout() {
           <tbody>
             {basket.items.map((item) => {
               return (
-                <tr className="item">
+                <tr className="item" key={item.id}>
                   <td className="item_name">
                     {item.name}
                     <a
