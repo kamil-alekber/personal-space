@@ -8,6 +8,7 @@ export interface Item {
   price: number
   imgUrl: string
   userType: string
+  content?: string
 }
 
 const BasketContext = React.createContext<{

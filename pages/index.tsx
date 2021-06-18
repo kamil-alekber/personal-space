@@ -3,9 +3,7 @@ import styles from '../styles/Home.module.css'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Item, useBasket } from '../hooks/useBasket'
-import fs from 'fs'
-import path from 'path'
-import matter from 'gray-matter'
+import { getAllProducts } from '../utils/content'
 
 export default function StartPage({ catalog }: { catalog: Item[] }) {
   const router = useRouter()
@@ -54,7 +52,7 @@ export default function StartPage({ catalog }: { catalog: Item[] }) {
                     <span className="price">{item.price}</span>
 
                     <div className={styles.catalog_item_description_actions}>
-                      <Link href={`/product/${item.slug}`}>
+                      <Link href={`/product/${item.id}`}>
                         <a>Подробней </a>
                       </Link>
                       <a
@@ -76,25 +74,8 @@ export default function StartPage({ catalog }: { catalog: Item[] }) {
   )
 }
 
-function getContent() {
-  const contentDir = path.join(process.cwd(), 'content')
-  const fileNames = fs.readdirSync(contentDir)
-  const data = fileNames.map((name) => {
-    const id = name.replace(/\.md$/, '')
-    const fullPath = path.join(contentDir, name)
-    const fileContents = fs.readFileSync(fullPath, 'utf8')
-
-    const matterResult = matter(fileContents)
-    return {
-      id,
-      ...matterResult.data,
-    }
-  })
-  return data
-}
-
 export async function getStaticProps() {
-  const catalog = getContent()
+  const catalog = getAllProducts()
   return {
     props: { catalog },
   }
