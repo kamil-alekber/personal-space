@@ -1,6 +1,10 @@
 import { useBasket } from '../hooks/useBasket'
 import styles from '../styles/Checkout.module.css'
 import IndeterminateCheckBoxIcon from '@material-ui/icons/IndeterminateCheckBox'
+import FormControl from '@material-ui/core/FormControl'
+import Input from '@material-ui/core/Input'
+import InputLabel from '@material-ui/core/InputLabel'
+import Button from '@material-ui/core/Button'
 
 export default function Checkout() {
   const basket = useBasket()
@@ -18,7 +22,6 @@ export default function Checkout() {
       total: countedBasket[item.name].total + item.price,
     }
   }
-  console.log(countedBasket)
 
   return (
     <div>
@@ -38,7 +41,6 @@ export default function Checkout() {
             'phone',
             'email',
             'details',
-            'delivery_type',
           ]
           const inputFieldValues = {}
 
@@ -51,38 +53,61 @@ export default function Checkout() {
       >
         <div className={styles.checkout_form_input_group}>
           <h3>Форма заказа</h3>
-          <label htmlFor="name">Имя </label>
-          <input id="name" type="text" name="name" />
-          <label htmlFor="family-name">Фамилия </label>
-          <input id="family-name" type="text" name="familyName" />
-          <label htmlFor="country">Страна/регион</label>
-          <input
-            type="text"
-            value="Казахстан"
-            id="country"
-            name="country"
-            disabled
-          />
-          <label htmlFor="address">Адрес</label>
-          <input
-            type="text"
-            id="address"
-            name="address"
-            placeholder="Номер дома и название улицы"
-          />
-          <label htmlFor="city">Населенный пункт</label>
-          <input type="text" id="city" name="city" />
-          <label htmlFor="region">Область район</label>
-          <input type="text" id="region" name="region" />
-          <label htmlFor="postcode">Почтовый индекс</label>
-          <input type="text" id="postcode" name="postcode" />
-          <label htmlFor="phone">Телефон</label>
-          <input type="text" id="phone" name="phone" />
-          <label htmlFor="email">Email</label>
-          <input type="text" id="email" name="email" />
+          <FormControl required margin="dense">
+            <InputLabel htmlFor="name">Имя</InputLabel>
+            <Input id="name" name="name" />
+          </FormControl>
+
+          <FormControl required margin="dense">
+            <InputLabel htmlFor="family-name">Фамилия</InputLabel>
+            <Input id="family-name" name="familyName" />
+          </FormControl>
+
+          <FormControl required margin="dense">
+            <InputLabel htmlFor="country">Страна</InputLabel>
+            <Input id="country" name="country" disabled value="Казахстан" />
+          </FormControl>
+
+          <FormControl required margin="dense">
+            <InputLabel htmlFor="region">Область район</InputLabel>
+            <Input id="region" name="region" />
+          </FormControl>
+
+          <FormControl required margin="dense">
+            <InputLabel htmlFor="city">Населенный пункт</InputLabel>
+            <Input id="city" name="city" />
+          </FormControl>
+
+          <FormControl required margin="dense">
+            <InputLabel htmlFor="address">Адрес</InputLabel>
+            <Input
+              id="address"
+              name="address"
+              placeholder="Номер дома и название улицы"
+            />
+          </FormControl>
+
+          <FormControl required margin="dense">
+            <InputLabel htmlFor="postcode">Почтовый индекс</InputLabel>
+            <Input id="postcode" name="postcode" type="number" />
+          </FormControl>
+
+          <FormControl required margin="dense">
+            <InputLabel htmlFor="phone">Телефон</InputLabel>
+            <Input id="phone" name="phone" type="number" />
+          </FormControl>
+
+          <FormControl required margin="dense">
+            <InputLabel htmlFor="email">Email</InputLabel>
+            <Input id="email" type="email" name="email" />
+          </FormControl>
+
           <h3>Детали</h3>
-          <label htmlFor="details">Примечание к заказу (необязательно)</label>
-          <textarea rows={5} cols={50} name="details" id="details" />
+
+          <FormControl margin="dense">
+            <InputLabel htmlFor="details">Примечание к заказу</InputLabel>
+            <Input multiline id="details" name="details" />
+          </FormControl>
         </div>
         <table className={styles.checkout_order}>
           <thead>
@@ -117,40 +142,21 @@ export default function Checkout() {
               )
             })}
           </tbody>
+          <hr />
           <tfoot>
-            <hr />
             <tr>
-              <th>Подытог</th>
+              <th>Итог:</th>
               <td>{basket.totalPrice}</td>
             </tr>
-            <hr />
-            <tr>
-              <th>Доставка</th>
-              <dt>
-                <div>
-                  <input
-                    type="radio"
-                    id="local_pickup"
-                    name="delivery_type"
-                    value="local_pickup"
-                  />
-                  <label htmlFor="local_pickup">Самовызов</label>
-                </div>
-
-                <div>
-                  <input
-                    type="radio"
-                    name="delivery_type"
-                    id="shipping"
-                    value="shipping"
-                  />
-                  <label htmlFor="shipping">Доставка</label>
-                </div>
-              </dt>
-            </tr>
           </tfoot>
-          <hr />
-          <button type="submit">Продолжить</button>
+          <Button
+            disabled={!basket.totalPrice}
+            type="submit"
+            variant="contained"
+            color="primary"
+          >
+            Продолжить
+          </Button>
         </table>
       </form>
     </div>
