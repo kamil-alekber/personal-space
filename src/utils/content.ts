@@ -1,16 +1,25 @@
 import path from 'path'
-import slug from 'slug'
 import fs from 'fs'
 import matter from 'gray-matter'
+import remark from 'remark'
+import html from 'remark-html'
 
-export function getProductIds() {
-  const contentDir = path.join(process.cwd(), 'content')
+const contentDir = path.join(process.cwd(), 'src/content')
+
+export interface Article {
+  id: string
+  title: string
+  date: string
+  imageUrl: string
+}
+
+export function getArticleIds() {
   const fileNames = fs.readdirSync(contentDir)
 
   const normalizeNames = fileNames.map((name) => {
     return {
       params: {
-        id: slug(name.replace('.md', '')),
+        id: name.replace('.md', ''),
       },
     }
   })
@@ -18,15 +27,15 @@ export function getProductIds() {
   return normalizeNames
 }
 
-export function getAllProducts() {
-  const contentDir = path.join(process.cwd(), 'content')
+export function getAllArticles() {
   const fileNames = fs.readdirSync(contentDir)
   const data = fileNames.map((name) => {
-    const id = slug(name.replace(/\.md$/, ''))
+    const id = name.replace(/\.md$/, '')
     const fullPath = path.join(contentDir, name)
-    const fileContents = fs.readFileSync(fullPath, 'utf8')
 
+    const fileContents = fs.readFileSync(fullPath, 'utf8')
     const matterResult = matter(fileContents)
+
     return {
       id,
       ...matterResult.data,
@@ -35,16 +44,18 @@ export function getAllProducts() {
   return data
 }
 
-export function getProduct(id: string) {
-  const contentDir = path.join(process.cwd(), 'content')
+export async function getArticle(id: string) {
   const fullPath = path.join(contentDir, `${id}.md`)
   const fileContents = fs.readFileSync(fullPath, 'utf8')
 
   const matterResult = matter(fileContents)
+  const processedContent = await remark()
+    .use(html)
+    .process(matterResult.content)
 
   return {
     id,
-    content: matterResult.content,
+    content: processedContent.contents,
     ...matterResult.data,
   }
 }
