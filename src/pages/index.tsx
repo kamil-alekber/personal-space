@@ -15,12 +15,11 @@ interface Props {
 }
 
 export default function Index(props: Props) {
-  console.log(props)
   const articles = props.articles.map((article) => {
     return (
       <ListItem key={article.id}>
         <ListItemAvatar>
-          <Avatar>
+          <Avatar variant="square" src={article.imageUrl}>
             <ImageOutlined />
           </Avatar>
         </ListItemAvatar>
@@ -32,6 +31,7 @@ export default function Index(props: Props) {
       </ListItem>
     )
   })
+
   return (
     <List>
       {articles}
