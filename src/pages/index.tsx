@@ -5,6 +5,10 @@ import {
   Avatar,
   ListItemText,
   Divider,
+  makeStyles,
+  createStyles,
+  Chip,
+  Theme,
 } from '@material-ui/core'
 import { ImageOutlined } from '@material-ui/icons'
 import { Article, getAllArticles } from '../utils/content'
@@ -14,20 +18,60 @@ interface Props {
   articles: Article[]
 }
 
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    small: {
+      width: theme.spacing(3),
+      height: theme.spacing(3),
+    },
+    large: {
+      width: theme.spacing(12),
+      height: theme.spacing(12),
+    },
+    margin: {
+      marginRight: theme.spacing(1.5),
+    },
+  })
+)
 export default function Index(props: Props) {
+  const classes = useStyles()
   const articles = props.articles.map((article) => {
     return (
       <ListItem key={article.id}>
-        <ListItemAvatar>
-          <Avatar variant="square" src={article.imageUrl}>
+        <ListItemAvatar className={classes.margin}>
+          <Avatar
+            className={classes.large}
+            variant="square"
+            src={article.imageUrl}
+          >
             <ImageOutlined />
           </Avatar>
         </ListItemAvatar>
-        <Link href={`/articles/${article.id}`}>
-          <a>
-            <ListItemText primary={article.title} secondary={article.date} />
-          </a>
-        </Link>
+
+        <ListItemText
+          primary={
+            <div>
+              <div>
+                <Link href={`/articles/${article.id}`}>
+                  <a>{article.title}</a>
+                </Link>
+              </div>
+              <div>
+                {article.tags.map((tag, i) => {
+                  return (
+                    <Chip
+                      className={classes.margin}
+                      key={i}
+                      label={tag}
+                      size="small"
+                    />
+                  )
+                })}
+              </div>
+            </div>
+          }
+          secondary={article.date}
+        />
       </ListItem>
     )
   })

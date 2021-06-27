@@ -11,6 +11,7 @@ export interface Article {
   title: string
   date: string
   imageUrl: string
+  tags: string[]
 }
 
 export function getArticleIds() {

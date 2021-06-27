@@ -12,7 +12,8 @@ export default function ArticleId(props: Props) {
       <Head>
         <title>{props?.article?.title}</title>
       </Head>
-
+      <br />
+      <small>Posted: {props?.article?.date}</small>
       <h3>{props.article.title}</h3>
       <div dangerouslySetInnerHTML={{ __html: props?.article?.content }} />
     </article>
