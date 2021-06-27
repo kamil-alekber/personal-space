@@ -1,6 +1,6 @@
 ---
 title: I am stuck without any job and prospect for growth?
-date: 26-06-2021
+date: 27-06-2021
 imageUrl: mario-azzi-stuck.jpg
 tags: [personal, development]
 ---

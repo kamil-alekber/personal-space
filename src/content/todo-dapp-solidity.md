@@ -1,6 +1,6 @@
 ---
 title: TODO dapp with solidity.
-date: 26-06-2021
+date: 29-06-2021
 imageUrl: markus-spiske-todo.jpg
 tags: [personal, development]
 ---

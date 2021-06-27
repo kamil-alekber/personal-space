@@ -1,6 +1,6 @@
 ---
 title: New frontier with DApp
-date: 26-06-2021
+date: 28-06-2021
 imageUrl: zoltan-tasi-eth.jpg
 tags: [personal, development]
 ---

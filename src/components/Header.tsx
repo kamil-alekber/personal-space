@@ -9,7 +9,7 @@ export function Header() {
         {/* <MenuIcon /> */}
         {/* </IconButton> */}
         <Link href="/">
-          <a>
+          <a style={{ color: '#fff' }}>
             <Button color="inherit">Home</Button>
           </a>
         </Link>
