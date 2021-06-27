@@ -12,8 +12,6 @@ import {
   MenuItem,
   Select,
   Theme,
-  Typography,
-  Container,
 } from '@material-ui/core'
 import { ImageOutlined } from '@material-ui/icons'
 import Link from 'next/link'
@@ -88,7 +86,12 @@ export default function Index(props: Props) {
               </div>
             </div>
           }
-          secondary={article.date}
+          secondary={
+            <div>
+              <div>{article.author.name}</div>
+              <div>{article.date}</div>
+            </div>
+          }
         />
       </ListItem>
     )

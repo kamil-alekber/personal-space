@@ -2,7 +2,12 @@
 title: I am stuck without any job and prospect for growth?
 date: 27-06-2021
 imageUrl: mario-azzi-stuck.jpg
-tags: [personal, development]
+tags:
+  - personal
+  - development
+author:
+  name: Kamil A.
+  email: kamil.alekber@gmail.com
 ---
 
 When I embarked myself on path of a software developer I though there won't be any hassle anymore. I mean with the current type of job I would be studying almost without any break. First you go through HTML, CSS & JS, following with some frontend library like [React](https://reactjs.org/), steadily transfer towards a backend development which is most likely a NodeJS since it eradicate the need to learn a new programming language thus making you focus on learning backend concepts rather than daunting yourself with the syntax of an unfamiliar language.

@@ -12,6 +12,10 @@ export interface Article {
   date: string
   imageUrl: string
   tags: string[]
+  author: {
+    name: string
+    email: string
+  }
 }
 
 export function getArticleIds() {

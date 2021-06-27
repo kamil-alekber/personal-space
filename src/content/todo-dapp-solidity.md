@@ -2,7 +2,12 @@
 title: TODO dapp with solidity.
 date: 29-06-2021
 imageUrl: markus-spiske-todo.jpg
-tags: [personal, development]
+tags:
+  - personal
+  - development
+author:
+  name: Kamil A.
+  email: kamil.alekber@gmail.com
 ---
 
 This might be the joke but bare with me it's worth your time. You can be skeptical in why on earth did I choose this topic but it's exactly to make things less sophisticated, and you can compare the traditional todo app that you built a long time ago (Don't deny, you did one) with what we going to do.
