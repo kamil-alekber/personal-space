@@ -12,6 +12,7 @@ export interface Article {
   date: string
   imageUrl: string
   tags: string[]
+  private: boolean
   author: {
     name: string
     email: string

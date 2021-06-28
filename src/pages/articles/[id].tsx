@@ -13,9 +13,15 @@ export default function ArticleId(props: Props) {
         <title>{props?.article?.title}</title>
       </Head>
       <br />
-      <small>Posted: {props?.article?.date}</small>
-      <h3>{props.article.title}</h3>
-      <div dangerouslySetInnerHTML={{ __html: props?.article?.content }} />
+      {props.article.private ? (
+        'The world is not yet ready to see this post'
+      ) : (
+        <div>
+          <small>Posted: {props?.article?.date}</small>
+          <h3>{props.article.title}</h3>
+          <div dangerouslySetInnerHTML={{ __html: props?.article?.content }} />
+        </div>
+      )}
     </article>
   )
 }

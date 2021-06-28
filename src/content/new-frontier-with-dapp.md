@@ -1,4 +1,5 @@
 ---
+private: true
 title: New frontier with DApp
 date: 28-06-2021
 imageUrl: zoltan-tasi-eth.jpg

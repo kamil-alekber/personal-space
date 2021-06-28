@@ -48,55 +48,58 @@ export default function Index(props: Props) {
   const [sorting, setSorting] = useState(SORT_OPTS[0])
   const classes = useStyles()
 
-  const articles = props.articles.map((article) => {
-    return (
-      <ListItem key={article.id}>
-        <Link href={`/articles/${article.id}`}>
-          <a>
-            <ListItemAvatar className={classes.margin}>
-              <Avatar
-                className={classes.large}
-                variant="square"
-                src={article.imageUrl}
-              >
-                <ImageOutlined />
-              </Avatar>
-            </ListItemAvatar>
-          </a>
-        </Link>
-        <ListItemText
-          primary={
-            <div>
+  const articles = props.articles
+    .filter((a) => !a.private)
+    .map((article) => {
+      return (
+        <ListItem key={article.id}>
+          <Link href={`/articles/${article.id}`}>
+            <a>
+              <ListItemAvatar className={classes.margin}>
+                <Avatar
+                  className={classes.large}
+                  variant="square"
+                  src={article.imageUrl}
+                >
+                  <ImageOutlined />
+                </Avatar>
+              </ListItemAvatar>
+            </a>
+          </Link>
+          <ListItemText
+            primary={
               <div>
-                <Link href={`/articles/${article.id}`}>
-                  <a>{article.title}</a>
-                </Link>
+                <div>
+                  <Link href={`/articles/${article.id}`}>
+                    <a>{article.title}</a>
+                  </Link>
+                </div>
+                <div>
+                  {article.tags.map((tag, i) => {
+                    return (
+                      <Chip
+                        className={classes.margin}
+                        key={i}
+                        label={tag}
+                        size="small"
+                      />
+                    )
+                  })}
+                </div>
               </div>
+            }
+            secondary={
               <div>
-                {article.tags.map((tag, i) => {
-                  return (
-                    <Chip
-                      className={classes.margin}
-                      key={i}
-                      label={tag}
-                      size="small"
-                    />
-                  )
-                })}
+                <div>{article.author.name}</div>
+                <div>{article.date}</div>
               </div>
-            </div>
-          }
-          secondary={
-            <div>
-              <div>{article.author.name}</div>
-              <div>{article.date}</div>
-            </div>
-          }
-        />
-      </ListItem>
-    )
-  })
+            }
+          />
+        </ListItem>
+      )
+    })
 
+  // TODO: make a proper sorting
   if (sorting !== 'DATE_DESC') articles.reverse()
 
   return (
