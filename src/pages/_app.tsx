@@ -2,10 +2,11 @@ import Head from 'next/head'
 import React from 'react'
 import '../styles/globals.css'
 import { Header } from '../components/Header'
+import { TodoProvider } from '../hooks/todoProvider'
 
 function MyApp({ Component, pageProps }) {
   return (
-    <React.Fragment>
+    <TodoProvider>
       <Head>
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -13,7 +14,7 @@ function MyApp({ Component, pageProps }) {
       <div className="container">
         <Component {...pageProps} />
       </div>
-    </React.Fragment>
+    </TodoProvider>
   )
 }
 
