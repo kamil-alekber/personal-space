@@ -1,4 +1,5 @@
-import React, { useState, useContext } from 'react'
+import React, { useContext } from 'react'
+import { useLocalStorage } from '../utils/useLocalStorage'
 
 interface Todo {
   id: string
@@ -31,10 +32,11 @@ const defaultTodoContext: ITodoContext = {
 const TodoContext = React.createContext(defaultTodoContext)
 
 export const TodoProvider: React.FC = ({ children }) => {
-  const [todoList, setTodoList] = useState<Todo[]>([])
+  const [todoList, setValueLS] = useLocalStorage<Todo[]>('board', [])
 
   function create(todo: Todo) {
-    setTodoList([...todoList, todo])
+    const newTodoList = [...todoList, todo]
+    setValueLS(newTodoList)
   }
 
   function edit(id: string, todo: Todo) {
@@ -43,13 +45,14 @@ export const TodoProvider: React.FC = ({ children }) => {
 
     const newTodoList = [...todoList]
     newTodoList[idx] = todo
-    setTodoList(newTodoList)
+    setValueLS(newTodoList)
   }
+
   function remove(id: string) {
     const [_, err] = findTodoIdx(id)
     if (err !== null) throw err
     const newTodoList = todoList.filter((val) => val.id !== id)
-    setTodoList(newTodoList)
+    setValueLS(newTodoList)
   }
 
   function findTodoIdx(id: string): [number, Error] {
@@ -60,6 +63,7 @@ export const TodoProvider: React.FC = ({ children }) => {
 
     return [idx, err]
   }
+
   return (
     <TodoContext.Provider value={{ todoList, create, edit, remove }}>
       {children}

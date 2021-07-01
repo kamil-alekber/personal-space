@@ -48,7 +48,7 @@ export default function BoardIndex() {
       <List>
         {todo.todoList.map((value) => {
           const labelId = `checkbox-list-label-${value.title}`
-
+          const localDate = new Date(parseInt(value.created)).toLocaleString()
           return (
             <ListItem
               key={value.id}
@@ -72,7 +72,7 @@ export default function BoardIndex() {
               <ListItemText
                 id={labelId}
                 primary={value.title}
-                secondary={value.created}
+                secondary={localDate}
               />
               <ListItemSecondaryAction>
                 <IconButton edge="end" aria-label="comments">
