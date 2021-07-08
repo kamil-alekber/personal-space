@@ -1,17 +1,14 @@
 import {
   Avatar,
   Chip,
-  createStyles,
   Divider,
   FormControl,
   List,
   ListItem,
   ListItemAvatar,
   ListItemText,
-  makeStyles,
   MenuItem,
   Select,
-  Theme,
 } from '@material-ui/core'
 import { ImageOutlined } from '@material-ui/icons'
 import Link from 'next/link'
@@ -22,31 +19,10 @@ interface Props {
   articles: Article[]
 }
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    formControl: {
-      margin: theme.spacing(1),
-      minWidth: 120,
-      maxWidth: 300,
-    },
-    small: {
-      width: theme.spacing(3),
-      height: theme.spacing(3),
-    },
-    large: {
-      width: theme.spacing(12),
-      height: theme.spacing(12),
-    },
-    margin: {
-      marginRight: theme.spacing(1.5),
-    },
-  })
-)
 const SORT_OPTS = ['DATE_DESC', 'DATE_ASC']
 
 export default function Index(props: Props) {
   const [sorting, setSorting] = useState(SORT_OPTS[0])
-  const classes = useStyles()
 
   const articles = props.articles
     .filter((a) => !a.private)
@@ -55,9 +31,9 @@ export default function Index(props: Props) {
         <ListItem key={article.id}>
           <Link href={`/articles/${article.id}`}>
             <a>
-              <ListItemAvatar className={classes.margin}>
+              <ListItemAvatar style={{ marginRight: '1.5rem' }}>
                 <Avatar
-                  className={classes.large}
+                  style={{ width: 100, height: 100 }}
                   variant="square"
                   src={article.imageUrl}
                 >
@@ -78,7 +54,7 @@ export default function Index(props: Props) {
                   {article.tags.map((tag, i) => {
                     return (
                       <Chip
-                        className={classes.margin}
+                        style={{ marginRight: '0.5rem' }}
                         key={i}
                         label={tag}
                         size="small"
@@ -104,7 +80,7 @@ export default function Index(props: Props) {
 
   return (
     <div style={{ marginTop: '0.5rem' }}>
-      <FormControl className={classes.formControl}>
+      <FormControl size="small">
         <Select
           value={sorting}
           onChange={(e) => {

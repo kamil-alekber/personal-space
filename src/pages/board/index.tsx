@@ -9,10 +9,11 @@ import {
   IconButton,
   Container,
   TextField,
+  Typography,
 } from '@material-ui/core'
 import CommentIcon from '@material-ui/icons/Comment'
 import AddIcon from '@material-ui/icons/Add'
-import DeleteIcon from '@material-ui/icons/Delete'
+import { RemoveDialogue } from '../../components/RemoveDialog'
 
 export default function BoardIndex() {
   const todo = useTodo()
@@ -40,15 +41,27 @@ export default function BoardIndex() {
           titleInput.value = ''
         }}
       >
-        <TextField id="standard-basic" name="title" label="Title" />
+        <TextField
+          id="standard-basic"
+          name="title"
+          label="Title"
+          size="small"
+        />
         <IconButton aria-label="create-todo" type="submit">
           <AddIcon />
         </IconButton>
       </form>
+      <div style={{ marginTop: '1rem' }}>
+        <Typography color="textSecondary">
+          Current list uses local storage, so utilize it at your own risk
+        </Typography>
+      </div>
       <List>
         {todo.todoList.map((value) => {
           const labelId = `checkbox-list-label-${value.title}`
-          const localDate = new Date(parseInt(value.created)).toLocaleString()
+          const date = new Date(parseInt(value.created))
+          const localDate = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`
+
           return (
             <ListItem
               key={value.id}
@@ -78,15 +91,7 @@ export default function BoardIndex() {
                 <IconButton edge="end" aria-label="comments">
                   <CommentIcon />
                 </IconButton>
-                <IconButton
-                  onClick={() => {
-                    todo.remove(value.id)
-                  }}
-                  edge="end"
-                  aria-label="delete"
-                >
-                  <DeleteIcon />
-                </IconButton>
+                <RemoveDialogue confirmAction={() => todo.remove(value.id)} />
               </ListItemSecondaryAction>
             </ListItem>
           )
