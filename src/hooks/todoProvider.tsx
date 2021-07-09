@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import { findListItemIdx } from '../utils/arrayMethods'
 import { useLocalStorage } from '../utils/useLocalStorage'
 
 interface Todo {
@@ -40,7 +41,7 @@ export const TodoProvider: React.FC = ({ children }) => {
   }
 
   function edit(id: string, todo: Todo) {
-    const [idx, err] = findTodoIdx(id)
+    const [idx, err] = findListItemIdx(id, todoList)
     if (err !== null) throw err
 
     const newTodoList = [...todoList]
@@ -49,19 +50,10 @@ export const TodoProvider: React.FC = ({ children }) => {
   }
 
   function remove(id: string) {
-    const [_, err] = findTodoIdx(id)
+    const [_, err] = findListItemIdx(id, todoList)
     if (err !== null) throw err
     const newTodoList = todoList.filter((val) => val.id !== id)
     setValueLS(newTodoList)
-  }
-
-  function findTodoIdx(id: string): [number, Error] {
-    const idx = todoList.findIndex((val) => val.id === id)
-    let err: Error = null
-    if (idx === -1)
-      err = new Error(`Could not find todo with following id: ${id}`)
-
-    return [idx, err]
   }
 
   return (

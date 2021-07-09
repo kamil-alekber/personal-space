@@ -1,42 +1,44 @@
 import {
   Button,
   Dialog,
-  DialogTitle,
+  DialogActions,
   DialogContent,
   DialogContentText,
-  DialogActions,
+  DialogTitle,
   IconButton,
 } from '@material-ui/core'
 import { useState } from 'react'
-import DeleteIcon from '@material-ui/icons/Delete'
 
 interface Props {
   confirmAction: () => void
+  opener: React.ReactNode
+  header: React.ReactNode
+  content: React.ReactNode
 }
 
-export function RemoveDialogue(props: Props) {
-  const [dialogState, toggleDialogueState] = useState(false)
-
-  const openDialogue = () => toggleDialogueState(true)
-  const closeDialogue = () => toggleDialogueState(false)
+export function DialogComponent(props: Props) {
+  const [dialogState, setDialogueState] = useState(false)
+  const openDialogue = () => setDialogueState(true)
+  const closeDialogue = () => setDialogueState(false)
 
   return (
     <span>
-      <IconButton onClick={openDialogue} edge="end" aria-label="delete">
-        <DeleteIcon />
+      <IconButton
+        onClick={openDialogue}
+        edge="end"
+        aria-label="delete"
+        style={{ color: '#fff' }}
+      >
+        {props.opener}
       </IconButton>
       <Dialog
-        // fullScreen={fullScreen}
         open={dialogState}
         onClose={closeDialogue}
         aria-labelledby="responsive-dialog-title"
       >
-        <DialogTitle id="responsive-dialog-title">Confirm action</DialogTitle>
+        <DialogTitle id="responsive-dialog-title">{props.header}</DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            Are you sure to remote the current item? You won't be able to undo
-            the current action
-          </DialogContentText>
+          <DialogContentText>{props.content}</DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={closeDialogue} color="primary">
@@ -47,7 +49,7 @@ export function RemoveDialogue(props: Props) {
             style={{ color: '#eb4034' }}
             autoFocus
           >
-            Remove
+            Confirm
           </Button>
         </DialogActions>
       </Dialog>

@@ -12,8 +12,9 @@ import {
   Typography,
 } from '@material-ui/core'
 import CommentIcon from '@material-ui/icons/Comment'
+import DeleteIcon from '@material-ui/icons/Delete'
 import AddIcon from '@material-ui/icons/Add'
-import { RemoveDialogue } from '../../components/RemoveDialog'
+import { DialogComponent } from '../../components/DialogComponent'
 
 export default function BoardIndex() {
   const todo = useTodo()
@@ -91,7 +92,13 @@ export default function BoardIndex() {
                 <IconButton edge="end" aria-label="comments">
                   <CommentIcon />
                 </IconButton>
-                <RemoveDialogue confirmAction={() => todo.remove(value.id)} />
+                <DialogComponent
+                  opener={<DeleteIcon color="error" />}
+                  header="Confirm action"
+                  content="Are you sure to remove the current item? You won't be able to undo
+                  the current action"
+                  confirmAction={() => todo.remove(value.id)}
+                />
               </ListItemSecondaryAction>
             </ListItem>
           )
