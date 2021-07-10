@@ -105,7 +105,7 @@ export default function BoardIndex() {
                   opener={<DeleteIcon color="error" />}
                   header="Confirm action"
                   content="Are you sure to remove the current item? You won't be able to undo
-                  the current action"
+                  the this action"
                   confirmAction={() => todo.remove(value.id)}
                 />
               </ListItemSecondaryAction>

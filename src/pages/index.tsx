@@ -93,7 +93,7 @@ export default function Index(props: Props) {
       )
     })
 
-  // TODO: make a proper sorting
+  // TODO: make a decent sorting
   if (sorting !== 'DATE_DESC') articles.reverse()
 
   return (
