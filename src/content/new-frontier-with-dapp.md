@@ -4,8 +4,8 @@ title: New frontier with DApp
 date: 28-06-2021
 imageUrl: zoltan-tasi-eth.jpg
 tags:
-  - personal
-  - development
+  - learning
+  - dapp
 author:
   name: Kamil A.
   email: kamil.alekber@gmail.com

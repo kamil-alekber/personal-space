@@ -5,7 +5,6 @@ date: 27-06-2021
 imageUrl: mario-azzi-stuck.jpg
 tags:
   - personal
-  - development
 author:
   name: Kamil A.
   email: kamil.alekber@gmail.com

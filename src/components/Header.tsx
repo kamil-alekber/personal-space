@@ -12,7 +12,7 @@ import {
 import Link from 'next/link'
 import { DialogComponent } from './DialogComponent'
 import MailIcon from '@material-ui/icons/Mail'
-import { useNotification } from '../hooks/notificationProvider'
+import { useNotification } from '../contexts/notificationProvider'
 import ImageIcon from '@material-ui/icons/Image'
 
 export function Header() {

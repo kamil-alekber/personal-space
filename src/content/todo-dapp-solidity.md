@@ -4,8 +4,8 @@ title: TODO dapp with solidity.
 date: 29-06-2021
 imageUrl: markus-spiske-todo.jpg
 tags:
-  - personal
-  - development
+  - programming
+  - dapp
 author:
   name: Kamil A.
   email: kamil.alekber@gmail.com

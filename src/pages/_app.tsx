@@ -2,10 +2,11 @@ import Head from 'next/head'
 import React from 'react'
 import '../styles/globals.css'
 import { Header } from '../components/Header'
-import { TodoProvider } from '../hooks/todoProvider'
-import { NotificationProvider } from '../hooks/notificationProvider'
+import { TodoProvider } from '../contexts/todoProvider'
+import { NotificationProvider } from '../contexts/notificationProvider'
+import { AppProps } from 'next/app'
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps }: AppProps) {
   return (
     <NotificationProvider>
       <TodoProvider>

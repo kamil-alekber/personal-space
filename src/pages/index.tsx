@@ -12,7 +12,8 @@ import {
 } from '@material-ui/core'
 import { ImageOutlined } from '@material-ui/icons'
 import Link from 'next/link'
-import { useState } from 'react'
+import React, { useState } from 'react'
+import { useQueryParam } from '../hooks/useQueryParam'
 import { Article, getAllArticles } from '../utils/content'
 
 interface Props {
@@ -23,6 +24,7 @@ const SORT_OPTS = ['DATE_DESC', 'DATE_ASC']
 
 export default function Index(props: Props) {
   const [sorting, setSorting] = useState(SORT_OPTS[0])
+  const [param, setParam] = useQueryParam('tags')
 
   const articles = props.articles
     .filter((a) => !a.private)
@@ -54,9 +56,25 @@ export default function Index(props: Props) {
                   {article.tags.map((tag, i) => {
                     return (
                       <Chip
+                        onClick={() => {
+                          const tagsList: string[] = param.split(',')
+                          const idx = tagsList.indexOf(tag)
+
+                          if (idx !== -1) {
+                            tagsList.splice(idx, 1)
+                          } else {
+                            tagsList.push(tag)
+                          }
+
+                          const serializedTags = tagsList.join(',')
+                          setParam(serializedTags)
+                        }}
                         style={{ marginRight: '0.5rem' }}
                         key={i}
                         label={tag}
+                        color={
+                          param?.indexOf(tag) !== -1 ? 'primary' : 'default'
+                        }
                         size="small"
                       />
                     )

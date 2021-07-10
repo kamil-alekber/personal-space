@@ -1,4 +1,4 @@
-import { useTodo } from '../../hooks/todoProvider'
+import { useTodo } from '../../contexts/todoProvider'
 import {
   List,
   ListItem,
@@ -25,6 +25,7 @@ export default function BoardIndex() {
         autoComplete="off"
         onSubmit={(e) => {
           e.preventDefault()
+          // @ts-ignore
           const titleInput = e.target[0]
 
           if (titleInput.value) {
@@ -54,7 +55,15 @@ export default function BoardIndex() {
       </form>
       <div style={{ marginTop: '1rem' }}>
         <Typography color="textSecondary">
-          Current list uses local storage, so utilize it at your own risk
+          Current list was built with{' '}
+          <a
+            rel="noopener noreferrer"
+            target="_blank"
+            href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage"
+          >
+            Local Storage
+          </a>
+          , so utilize it at your own risk
         </Typography>
       </div>
       <List>

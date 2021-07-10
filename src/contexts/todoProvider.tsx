@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { findListItemIdx } from '../utils/arrayMethods'
-import { useLocalStorage } from '../utils/useLocalStorage'
+import { useLocalStorage } from '../hooks/useLocalStorage'
 
 interface Todo {
   id: string
